@@ -5,7 +5,9 @@ public class Starter {
         String x = "sos sos";
         String x1 = "... --- ... // ... --- ...";
 
+        System.out.println("Convert to morse");
         System.out.println(EncodeKey.convertEng(x));
+        System.out.println("Convert to english");
         System.out.println(EncodeKey.convertMorse(x1));
     }
 }

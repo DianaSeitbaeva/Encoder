@@ -5,7 +5,7 @@ import java.util.TreeMap;
 
 public class EncodeKey {
     private static Map<Character, String> engToMorse = new TreeMap<>();
-    private static Map<String, String> morseToEng = new TreeMap<>();
+    private static Map<String, Character> morseToEng = new TreeMap<>();
 
     static{
         engToMorse.put('a', "-.");
@@ -37,35 +37,35 @@ public class EncodeKey {
         engToMorse.put(' ',"//");
     }
     static {
-        morseToEng.put("-.", "a");
-        morseToEng.put("-...", "b");
-        morseToEng.put("-.-.", "c");
-        morseToEng.put("-..", "d");
-        morseToEng.put(".", "e");
-        morseToEng.put("..-.", "f");
-        morseToEng.put("--.", "g");
-        morseToEng.put("....", "h");
-        morseToEng.put("..", "i");
-        morseToEng.put(".---", "j");
-        morseToEng.put("-.-", "k");
-        morseToEng.put(".-..", "l");
-        morseToEng.put("--", "m");
-        morseToEng.put("-.", "n");
-        morseToEng.put("---", "o");
-        morseToEng.put(".--.", "p");
-        morseToEng.put("--.-", "q");
-        morseToEng.put(".-.", "r");
-        morseToEng.put("...", "s");
-        morseToEng.put("-", "t");
-        morseToEng.put("..-", "u");
-        morseToEng.put("...-", "v");
-        morseToEng.put(".--", "w");
-        morseToEng.put("-..-", "x");
-        morseToEng.put("-.--", "y");
-        morseToEng.put("--..", "z");
-        morseToEng.put("//", " ");
+        morseToEng.put("-.", 'a');
+        morseToEng.put("-...", 'b');
+        morseToEng.put("-.-.", 'c');
+        morseToEng.put("-..", 'd');
+        morseToEng.put(".", 'e');
+        morseToEng.put("..-.", 'f');
+        morseToEng.put("--.", 'g');
+        morseToEng.put("....", 'h');
+        morseToEng.put("..", 'i');
+        morseToEng.put(".---", 'j');
+        morseToEng.put("-.-", 'k');
+        morseToEng.put(".-..", 'l');
+        morseToEng.put("--", 'm');
+        morseToEng.put("-.", 'n');
+        morseToEng.put("---", 'o');
+        morseToEng.put(".--.", 'p');
+        morseToEng.put("--.-", 'q');
+        morseToEng.put(".-.", 'r');
+        morseToEng.put("...", 's');
+        morseToEng.put("-", 't');
+        morseToEng.put("..-", 'u');
+        morseToEng.put("...-", 'v');
+        morseToEng.put(".--", 'w');
+        morseToEng.put("-..-", 'x');
+        morseToEng.put("-.--", 'y');
+        morseToEng.put("--..", 'z');
+        morseToEng.put("//", ' ');
 
-        for(Map.Entry<String , String> entry : morseToEng.entrySet()) {
+        for(Map.Entry<String , Character> entry : morseToEng.entrySet()) {
             morseToEng.put(entry.getKey(), entry.getValue());
         }
 
@@ -74,11 +74,11 @@ public class EncodeKey {
         }
 }
 
-    public static Map<String, String> getMorseToEng() {
+    public static Map<String, Character> getMorseToEng() {
         return morseToEng;
     }
 
-    public static void setMorseToEng(Map<String, String> morseToEng) {
+    public static void setMorseToEng(Map<String, Character> morseToEng) {
         EncodeKey.morseToEng = morseToEng;
     }
 
@@ -98,25 +98,31 @@ public class EncodeKey {
         return output.toString();
         }
 
-    public static String convertMorse(String input){
+    public static String convertMorse(String input) {
         StringBuilder output = new StringBuilder();
-        for(Character x1: input.toCharArray()) {
-            output.append(morseToEng.get(x1));
+        String[] words = input.split("\\s{2}");
+        for (String word : words) {
+            output.append(' ');
+            String[] letters = word.split("\\s");
+            for (String letter : letters) {
+                output.append(morseToEng.get(letter));
+            }
         }
-        return output.toString();
-    }
+            return output.toString();
+        }
 
-    public static void pr(){
-        for (Map.Entry<Character, String> entry : engToMorse.entrySet()){
-            System.out.println(entry.getValue() + "," + entry.getKey());
-            engToMorse.put(entry.getKey(), entry.getValue());
-        }
-    }
 
-    public static void pri(){
-        for (Map.Entry<String, String> entry : morseToEng.entrySet()){
-            System.out.println(entry.getKey() + "," + entry.getValue());
-            morseToEng.put(entry.getKey(), entry.getValue());
+        public static void pr () {
+            for (Map.Entry<Character, String> entry : engToMorse.entrySet()) {
+                System.out.println(entry.getValue() + "," + entry.getKey());
+                engToMorse.put(entry.getKey(), entry.getValue());
+            }
+        }
+
+        public static void pri () {
+            for (Map.Entry<String, Character> entry : morseToEng.entrySet()) {
+                System.out.println(entry.getKey() + "," + entry.getValue());
+                morseToEng.put(entry.getKey(), entry.getValue());
+            }
         }
     }
-}
